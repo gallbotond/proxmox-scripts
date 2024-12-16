@@ -2,10 +2,6 @@
 
 sudo apt update && sudo apt upgrade -y
 
-# Add the current user to the docker group:
-newgrp docker
-sudo usermod -aG docker $USER
-
 # Add Docker's official GPG key:
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -22,5 +18,6 @@ sudo apt-get update
 # Install Docker:
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-# Verify that Docker is installed correctly by running the hello-world image:
-docker run hello-world
+# Add the current user to the docker group:
+sudo newgrp docker
+sudo usermod -aG docker $USER

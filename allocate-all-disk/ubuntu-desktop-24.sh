@@ -7,7 +7,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Step 1: Launch cfdisk to extend the partition
-cfdisk
+cfdisk # TODO automate this step
 
 # Inform the user to extend the partition in cfdisk
 echo "\nEnsure you extend /dev/sda3 with the available free space using cfdisk. Press Enter to continue once done."

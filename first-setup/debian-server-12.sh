@@ -10,4 +10,4 @@ source ~/.bashrc
 sudo apt update && sudo apt upgrade -y
 
 # Install required packages
-sudo apt install -y sudo curl wget git
+sudo apt install -y sudo curl wget git parted

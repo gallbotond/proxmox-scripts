@@ -38,3 +38,9 @@ else
     echo "Error: Failed to restart pveproxy service."
     exit 1
 fi
+
+
+
+# another method
+wget https://raw.githubusercontent.com/foundObjects/pve-nag-buster/master/install.sh
+bash install.sh

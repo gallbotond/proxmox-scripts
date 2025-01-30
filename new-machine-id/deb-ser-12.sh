@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "old machine-id"
 cat /etc/machine-id
 

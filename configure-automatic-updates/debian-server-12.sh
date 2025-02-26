@@ -6,13 +6,13 @@ echo "🚀 Setting up automatic security updates on Ubuntu..."
 echo "🔄 Updating package lists..."
 sudo apt update -y
 
-# Install unattended-upgrades if not installed
+# Install unattended-upgrades without interactive prompts
 echo "📦 Installing unattended-upgrades..."
 sudo apt install -y unattended-upgrades
 
-# Enable unattended-upgrades
+# Enable unattended upgrades non-interactively
 echo "✅ Enabling unattended-upgrades..."
-sudo dpkg-reconfigure --priority=low unattended-upgrades
+sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure unattended-upgrades
 
 # Configure 50unattended-upgrades
 CONFIG_FILE="/etc/apt/apt.conf.d/50unattended-upgrades"
@@ -28,7 +28,7 @@ Unattended-Upgrade::Automatic-Reboot "true";
 Unattended-Upgrade::Automatic-Reboot-Time "03:00";
 EOL
 
-# Configure 20auto-upgrades
+# Configure 20auto-upgrades manually
 AUTO_UPGRADES_FILE="/etc/apt/apt.conf.d/20auto-upgrades"
 echo "⚙️ Configuring $AUTO_UPGRADES_FILE..."
 sudo tee "$AUTO_UPGRADES_FILE" > /dev/null <<EOL

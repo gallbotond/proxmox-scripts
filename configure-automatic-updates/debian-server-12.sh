@@ -11,8 +11,9 @@ echo "📦 Installing unattended-upgrades..."
 sudo apt install -y unattended-upgrades
 
 # Enable unattended upgrades non-interactively
-echo "✅ Enabling unattended-upgrades..."
-sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure unattended-upgrades
+echo "✅ Enabling unattended-upgrades... Please run the following command manually:"
+echo "sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure unattended-upgrades"
+# sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure unattended-upgrades
 
 # Configure 50unattended-upgrades
 CONFIG_FILE="/etc/apt/apt.conf.d/50unattended-upgrades"

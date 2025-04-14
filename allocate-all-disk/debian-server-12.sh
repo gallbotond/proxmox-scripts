@@ -6,6 +6,10 @@
 #    exit 1
 # fi
 
+# Install parted
+sudo apt update
+sudo apt install parted -y
+
 # Resize partitions
 sudo parted /dev/sda resizepart 2 -1s
 sudo parted /dev/sda resizepart 5 -1s

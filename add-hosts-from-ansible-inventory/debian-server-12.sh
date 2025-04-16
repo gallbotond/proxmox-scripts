@@ -1,16 +1,21 @@
 #!/bin/bash
 
-# Backup the original /etc/hosts file
-sudo cp /etc/hosts /etc/hosts.bak
+# Check if the inventory file is provided as an argument
+if [[ $# -ne 1 ]]; then
+    echo "Usage: $0 <inventory_file>"
+    exit 1
+fi
 
-# Ask the user for the inventory file path
-read -p "Enter the path to the inventory file: " INVENTORY_FILE
+INVENTORY_FILE="$1"
 
 # Check if the file exists
 if [[ ! -f "$INVENTORY_FILE" ]]; then
     echo "Error: Inventory file not found at $INVENTORY_FILE"
     exit 1
 fi
+
+# Backup the original /etc/hosts file
+sudo cp /etc/hosts /etc/hosts.bak
 
 # Parse the inventory file and add entries to /etc/hosts
 while IFS= read -r line; do

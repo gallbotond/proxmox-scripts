@@ -14,8 +14,26 @@ if [[ ! -f "$INVENTORY_FILE" ]]; then
     exit 1
 fi
 
+# Create a backup directory if it doesn't exist
+BACKUP_DIR="/etc/hosts.bk"
+sudo mkdir -p "$BACKUP_DIR"
+
+# Find the next available backup filename
+INDEX=1
+while [[ -f "$BACKUP_DIR/hosts.bk$INDEX" ]]; do
+    ((INDEX++))
+done
+BACKUP_FILE="$BACKUP_DIR/hosts.bk$INDEX"
+
 # Backup the original /etc/hosts file
-sudo cp /etc/hosts /etc/hosts.bak
+sudo cp /etc/hosts "$BACKUP_FILE"
+echo "Backup created at $BACKUP_FILE"
+
+COMMENT="# Homelab entries"
+# Add a single comment before the new entries section
+if ! grep -q "$COMMENT" /etc/hosts; then
+    echo -e "\n$COMMENT" | sudo tee -a /etc/hosts > /dev/null
+fi
 
 # Parse the inventory file and add entries to /etc/hosts
 while IFS= read -r line; do

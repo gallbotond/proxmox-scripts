@@ -29,10 +29,10 @@ BACKUP_FILE="$BACKUP_DIR/hosts.bk$INDEX"
 sudo cp /etc/hosts "$BACKUP_FILE"
 echo "Backup created at $BACKUP_FILE"
 
-COMMENT="# Homelab entries"
 # Add a single comment before the new entries section
-if ! grep -q "$COMMENT" /etc/hosts; then
-    echo -e "\n$COMMENT" | sudo tee -a /etc/hosts > /dev/null
+COMMENT_START="# BEGIN: Homelab entries from ansible"
+if ! grep -q "$COMMENT_START" /etc/hosts; then
+    echo -e "\n$COMMENT_START" | sudo tee -a /etc/hosts > /dev/null
 fi
 
 # Parse the inventory file and add entries to /etc/hosts
@@ -54,5 +54,11 @@ while IFS= read -r line; do
         fi
     fi
 done < "$INVENTORY_FILE"
+
+# Add the closing comment for the section
+COMMENT_END="# END: Homelab entries from ansible"
+if ! grep -q "$COMMENT_END" /etc/hosts; then
+    echo "$COMMENT_END" | sudo tee -a /etc/hosts > /dev/null
+fi
 
 echo "Hosts file update completed."

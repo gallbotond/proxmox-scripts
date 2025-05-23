@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load environment variables from external file
-source ./proxmox.env
+source "$(dirname "$0")/proxmox.env"
 
 # Check that all required variables are set
 if [[ -z "$API_URL" || -z "$TOKEN_ID" || -z "$TOKEN_SECRET" ]]; then
